@@ -2,8 +2,11 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./navbar.css";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Navbar = () => {
+  const { users } = useContext(AuthContext);
   const menu = (
     <>
       <li>
@@ -34,20 +37,28 @@ const Navbar = () => {
         <ul className=" menu-horizontal gap-x-5">{menu}</ul>
       </div>
       <div className="navbar-end">
-        <div>
-          <Link
-            to="/register"
-            className=" mr-5 underline decoration-primaryColor underline-offset-4 text-primaryColor"
-          >
-            register
-          </Link>
-          <Link
-            to="/login"
-            className="btn border-2 text-primaryColor border-primaryColor"
-          >
-            Login
-          </Link>
-        </div>
+        {users ? (
+          <div>
+            <Link className=" px-4 py-2 border-2 text-primaryColor border-primaryColor">
+              Logout
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <Link
+              to="/register"
+              className=" mr-5 underline decoration-primaryColor underline-offset-4 text-primaryColor"
+            >
+              register
+            </Link>
+            <Link
+              to="/login"
+              className=" px-4 py-2 border-2 text-primaryColor border-primaryColor"
+            >
+              Login
+            </Link>
+          </div>
+        )}
         <div className="dropdown ml-4 lg:hidden">
           <div className="drawer drawer-end">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
