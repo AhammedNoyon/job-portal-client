@@ -13,7 +13,7 @@ const Banner = () => {
     Aos.init({ duration: 1000 });
   }, []);
   return (
-    <div className="hero w-11/12 md:w-3/4 mx-auto">
+    <div className="hero ">
       <div className="hero-content items-center lg:items-start flex-col lg:flex-row-reverse">
         <div className="flex-1 relative mb-10 md:mb-20 lg:mb-0">
           <motion.img
@@ -58,7 +58,7 @@ const Banner = () => {
             Each month, more than 3 million job seekers turn to website in their
             search for work, making over 140,000 applications every single day
           </p>
-          <div className="flex flex-col md:flex-row bg-white shadow-2xl rounded-xl py-3 px-5 w-11/12 md:w-fit text-center md:text-start">
+          <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-xl py-3 px-5 w-11/12 md:w-fit text-center md:text-start">
             <select className="select   max-w-xs">
               <option disabled selected>
                 <FaBusinessTime /> Normal
