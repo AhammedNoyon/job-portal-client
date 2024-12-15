@@ -1,12 +1,14 @@
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./navbar.css";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { users } = useContext(AuthContext);
+  const { users, signOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const menu = (
     <>
       <li>
@@ -23,8 +25,30 @@ const Navbar = () => {
       </li>
     </>
   );
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Sign out successfully.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/login");
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: error.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
   return (
-    <div className="navbar p-0 bg-base-100 w-11/12 md:w-5/6 mx-auto">
+    <div className="navbar p-0  w-11/12 md:w-3/4 mx-auto">
       <div className="navbar-start">
         <Link className=" btn-ghost text-xl">
           <div className="flex items-center gap-1">
@@ -38,7 +62,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {users ? (
-          <div>
+          <div onClick={handleSignOut}>
             <Link className=" px-4 py-2 border-2 text-primaryColor border-primaryColor">
               Logout
             </Link>
